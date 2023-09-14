@@ -1,0 +1,41 @@
+﻿@model Blog.Client.ViewModels.PostRejectionViewModel
+<div class="row">
+    <div class="col-lg-9 mx-auto pt-md-5">
+        <h1 class="display-4">@Model.Title</h1>
+        <p class="lead">@Model.Content</p>
+        <ul class="nav nav-divider align-items-center">
+            <li class="nav-item">
+                <div class="nav-link p-0">
+                    by <span class="text-reset btn-link text-primary-emphasis">@Model.Author</span>
+                </div>
+            </li>
+            <li class="nav-item p-3">@Model.DateOfPublish</li>
+        </ul>
+        <div>
+            <partial name="_ValidationSummary" />
+            <form class="row g-3 mt-2" method="post">
+                <div class="col-12">
+                    <h3>Previous rejection comments:</h3>
+                    @foreach (var item in Model.RejectionComments)
+                    {
+                        <p>@item.DateOfPublish - @item.Content</p>
+                    }
+                </div>
+                <div class="col-12">
+                    <label asp-for="RejectionComment" class="form-label"></label>
+                    <input class="form-control" rows="3" asp-for="RejectionComment" />
+                    <span asp-validation-for="RejectionComment" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Send rejection</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

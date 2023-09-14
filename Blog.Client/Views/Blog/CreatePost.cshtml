@@ -1,0 +1,31 @@
+﻿@model Blog.Client.ViewModels.CreatePostViewModel
+
+<div class="row">
+    <div class="col-lg-9 mx-auto pt-md-5">
+        <partial name="_ValidationSummary" />
+        <div class="card">
+            <form class="row g-3 mt-2" method="post">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input type="text" asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </h5>
+                    <p class="card-text">
+                        <label asp-for="Content" class="form-label"></label>
+                        <textarea class="form-control" rows="3" asp-for="Content"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </p>                    
+                    <button class="card-link btn btn-success" type="submit">Save</button>
+                    <a asp-action="Index" class="card-link btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

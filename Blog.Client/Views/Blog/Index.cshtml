@@ -1,0 +1,23 @@
+﻿@model Blog.Client.ViewModels.BlogViewModel
+@using Blog.Client.Extensions
+
+<div class="row mb-2">
+    @foreach (var item in Model.Posts)
+    {
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary-emphasis">@item.Author</strong>
+                    <h3 class="mb-0">@item.Title</h3>
+                    <div class="mb-1 text-body-secondary">@item.DateOfPublish</div>
+                    <p class="card-text mb-auto">@item.Content.Truncate(91)</p>
+                    <div class="d-sm-flex align-items-center justify-content-between">
+                        <a asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-primary-soft post-link">
+                            Continue reading
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

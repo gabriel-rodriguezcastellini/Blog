@@ -1,0 +1,33 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.text-primary-emphasis {
+    color: #6ea8fe;
+}
+
+.post-link {
+    color: #2163e8;
+    background-color: rgba(33, 99, 232, 0.1);
+}
+
+    .post-link:active, .post-link:hover {
+        color: #fff;
+        background-color: #2163e8;
+        border-color: #2163e8;
+    }

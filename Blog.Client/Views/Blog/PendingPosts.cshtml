@@ -1,0 +1,58 @@
+﻿@model Blog.Client.ViewModels.BlogViewModel
+@using Blog.Client.Extensions
+@using Blog.Model;
+
+<style>
+    .post-content {
+        min-height: 200px; /* Adjust the height as needed */
+    }
+</style>
+
+<div class="row mb-2">
+    <h1 class="text-center">Pending posts</h1>
+    @if (Model.Posts.Any())
+    {
+        @foreach (var chunk in Model.Posts.Chunk(2))
+        {
+            <div class="row mb-4">
+                @foreach (var item in chunk)
+                {
+                    <div class="col-md-6">
+                        <div class="col">
+                            <!-- Apply Bootstrap card classes based on post status -->
+                            <div class="card mb-4 shadow-sm position-relative">
+                                <div class="card-body d-flex flex-column post-content">
+                                    <strong class="d-inline-block mb-2 text-black fw-bolder">@item.Author</strong>
+                                    <h3 class="mb-0">@item.Title</h3>
+                                    <div class="mb-1 text-body-secondary">@item.DateOfPublish</div>
+                                    <p class="card-text mb-auto">@item.Content.Truncate(91)</p>
+                                </div>
+                                <!-- Create a separate container for buttons -->
+                                <div class="card-footer mt-auto d-flex align-items-center justify-content-between">
+                                    <a asp-controller="Blog" asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-dark bg-black text-white post-link ms-3">
+                                        Continue reading
+                                    </a>
+                                    <a asp-controller="Blog" asp-action="ApprovePost" asp-route-id="@item.Id" class="btn btn-xs btn-dark bg-success text-white post-link me-3">
+                                        Approve
+                                    </a>
+                                    <a asp-controller="Blog" asp-action="RejectPost" asp-route-id="@item.Id" class="btn btn-xs btn-dark bg-danger text-white post-link me-3">
+                                        Reject
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (chunk.Count() < 2)
+                {
+                    <!-- Add an empty column to maintain layout consistency -->
+                    <div class="col"></div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p>No posts available.</p>
+    }
+</div>
